@@ -59,7 +59,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:CopyFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Config파일에 path 써두고 불러와서 사용?" Destination="Data\Input\부동산공시_배혜빈.xlsx" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="354,208" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="Data\Input\부동산공시가격.xlsx">
+    <ui:CopyFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Config파일에 path 써두고 불러와서 사용?" Destination="Data\Output\부동산공시_배혜빈.xlsx" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="354,208" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="Data\Input\부동산공시가격.xlsx">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
