@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1228,951</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1177,951</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="50">
@@ -151,15 +151,15 @@
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_dicConfig">
           <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
         </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="out_str열람지역">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str열람지역" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="out_str공시기준일">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str공시기준일" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="out_str공시기준일가격">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str공시기준일가격" />
-        </InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_str열람지역">
+          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="str열람지역" />
+        </OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_str공시기준일">
+          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="str공시기준일" />
+        </OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_str공시기준일가격">
+          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="str공시기준일가격" />
+        </OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
     <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="354,65" sap2010:WorkflowViewState.IdRef="CommentOut_2">
@@ -189,18 +189,10 @@
     </ui:CommentOut>
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Jobs\04_1.CheckContents.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="354,153" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Jobs\04_1.CheckContents.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">
-          <VisualBasicReference x:TypeArguments="sd:DataRow" ExpressionText="in_TransactionItem" />
-        </InOutArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_str열람지역">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str열람지역" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_str공시기준일">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str공시기준일" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_str공시기준일가격">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str공시기준일가격" />
-        </InArgument>
+        <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[in_TransactionItem]</InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_str열람지역">[str열람지역]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_str공시기준일">[str공시기준일]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_str공시기준일가격">[str공시기준일가격]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
     <ui:Comment DisplayName="Comment (placeholder)" sap:VirtualizedContainerService.HintSize="354,79" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//  Invoke steps of the process" />
