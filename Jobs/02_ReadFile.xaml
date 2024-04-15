@@ -93,12 +93,13 @@
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="_02_ReadFile" sap:VirtualizedContainerService.HintSize="416,199" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="_02_ReadFile" sap:VirtualizedContainerService.HintSize="416,380" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="354,181" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Fatal]" Message="[&quot;파일읽고 컬럼 추가, 변수초기화&quot;]" />
     <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[out_ListDT]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="354,111" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="회원목록" WorkbookPath="Data\Input\부동산공시_배혜빈.xlsx" />
   </Sequence>
 </Activity>
