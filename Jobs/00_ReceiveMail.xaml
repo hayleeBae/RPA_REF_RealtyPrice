@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1228,1504</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1177,1504</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>_00_메일수신_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -123,7 +123,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:GetIMAPMailMessages>
-    <Assign sap:VirtualizedContainerService.HintSize="450,122" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign DisplayName="첨부파일 리스트 변수 생성 | Assign" sap:VirtualizedContainerService.HintSize="450,122" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="scg:List(x:String)">[out_listSaveFile]</OutArgument>
       </Assign.To>
@@ -131,7 +131,7 @@
         <InArgument x:TypeArguments="scg:List(x:String)">[New List(of String)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="450,789" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[listMail]">
+    <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" DisplayName="메일 출력 변수For Each" sap:VirtualizedContainerService.HintSize="450,789" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[listMail]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="snm:MailMessage">
           <ActivityAction.Argument>
@@ -150,14 +150,14 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </WriteLine>
-            <ui:SaveMailAttachments sap2010:Annotation.AnnotationText="메일을 읽어서 첨부파일 어디에 저장할지 경로 기재&#xA;필터 설정 : &quot;.xlsx&quot; -&gt; 엑셀파일만 다운받기&#xA;출력 첨부 파일 변수 생성하면 IEnumerable형식, 리스트처럼 못쓰나..?" Attachments="[SaveFile]" DisplayName="Save Attachments" ExcludeInlineAttachments="False" Filter=".xlsx" FolderPath="Data\Input" sap:VirtualizedContainerService.HintSize="354,200" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_1" Message="[currentMailMessage]" OverwriteExisting="False">
+            <ui:SaveMailAttachments sap2010:Annotation.AnnotationText="메일을 읽어서 첨부파일 어디에 저장할지 경로 기재&#xA;필터 설정 : &quot;.xlsx&quot; -&gt; 엑셀파일만 다운받기&#xA;출력 첨부 파일 변수 생성하면 IEnumerable형식, 리스트처럼 못쓰나..?" Attachments="[SaveFile]" DisplayName="첨부파일 저장 | Save Attachments" ExcludeInlineAttachments="False" Filter=".xlsx" FolderPath="Data\Input" sap:VirtualizedContainerService.HintSize="354,200" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_1" Message="[currentMailMessage]" OverwriteExisting="False">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:SaveMailAttachments>
-            <uasa:AppendItemToList x:TypeArguments="x:String" ItemIndex="{x:Null}" DisplayName="Append Item to List" sap:VirtualizedContainerService.HintSize="354,156" sap2010:WorkflowViewState.IdRef="AppendItemToList`1_1" ItemToAppend="[SaveFile.ElementAt(0).ToString]" List="[out_listSaveFile]" />
+            <uasa:AppendItemToList x:TypeArguments="x:String" ItemIndex="{x:Null}" DisplayName="첨부파일 경로 리스트 추가 | Append Item to List" sap:VirtualizedContainerService.HintSize="354,156" sap2010:WorkflowViewState.IdRef="AppendItemToList`1_1" ItemToAppend="[SaveFile.ElementAt(0).ToString]" List="[out_listSaveFile]" />
           </Sequence>
         </ActivityAction>
       </ui:ForEach.Body>
