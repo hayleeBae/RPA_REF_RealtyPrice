@@ -104,6 +104,6 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="354,181" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Fatal]" Message="[&quot;파일읽고 컬럼 추가, 변수초기화&quot;]" />
-    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[out_ListDT]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="354,111" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="회원목록" WorkbookPath="[&quot;Data\Output\&quot; + in_FileName + &quot;_배혜빈.xlsx&quot;]" />
+    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[out_ListDT]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="354,111" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="회원목록" WorkbookPath="[in_FileName + &quot;_배혜빈.xlsx&quot;]" />
   </Sequence>
 </Activity>

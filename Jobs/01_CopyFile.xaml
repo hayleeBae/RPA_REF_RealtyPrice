@@ -1,12 +1,12 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="_01_CopyFile" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_SaveFile" Type="InArgument(scg:List(x:String))" />
+    <x:Property Name="in_SaveFile" Type="InArgument(scg:IEnumerable(x:String))" />
     <x:Property Name="out_FileName" Type="OutArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1177,830</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1177,875</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>_00_CopyFile_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -91,19 +91,19 @@
       <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="_00_CopyFile" sap:VirtualizedContainerService.HintSize="496,765" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="_00_CopyFile" sap:VirtualizedContainerService.HintSize="496,810" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,181" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;파일카피&quot;]" />
-    <Assign sap2010:Annotation.AnnotationText="Filepath가 절대경로로 저장됨&#xA;- split으로 잘라서 파일명만 사용 or 절대경로 전체를 사용&#xD;&#xA;&#xD;&#xA;C:\Users\ICTCoC\Documents\UiPath\RPA02_부동산공시가격_배혜빈\Data\Input + 파일명&#xA;&#xA;ElementAt(1) 메서드 -&gt; 1번째 인덱스에 위치한 값&#xA;ElementAtOrDefault() -&gt; 범위 벗어나도 에러 안남" DisplayName="파일명 변수 저장 | Assign" sap:VirtualizedContainerService.HintSize="434,254" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign sap2010:Annotation.AnnotationText="Filepath가 절대경로로 저장됨&#xA;- split으로 잘라서 파일명만 사용 or 절대경로 전체를 사용&#xA;&#xA;C:\Users\ICTCoC\Documents\UiPath\RPA02_부동산공시가격_배혜빈\Data\Input + 파일명&#xA;&#xA;(in_SaveFile.Item(0).Split(&quot;\&quot;, stringsplitoptions.None).ToList).Item(8)&#xA;=&gt; 일단 절대경로로 사용&#xA;&#xA;ElementAt(1) 메서드 -&gt; 1번째 인덱스에 위치한 값&#xA;ElementAtOrDefault() -&gt; 범위 벗어나도 에러 안남" DisplayName="파일명 변수 저장 | Assign" sap:VirtualizedContainerService.HintSize="434,299" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[out_FileName]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[(in_SaveFile.Item(0).Split("\", stringsplitoptions.None).ToList).Item(8)]</InArgument>
+        <InArgument x:TypeArguments="x:String">[in_SaveFile.ElementAt(0)]</InArgument>
       </Assign.Value>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -111,7 +111,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:CopyFile ContinueOnError="{x:Null}" Destination="[&quot;Data\Output\&quot; + out_FileName + &quot;_배혜빈.xlsx&quot;]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="434,194" sap2010:WorkflowViewState.IdRef="CopyFile_2" Overwrite="True" Path="[&quot;Data\Input\&quot; + out_FileName]">
+    <ui:CopyFile ContinueOnError="{x:Null}" Destination="[out_FileName + &quot;_배혜빈.xlsx&quot;]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="434,194" sap2010:WorkflowViewState.IdRef="CopyFile_2" Overwrite="True" Path="[out_FileName]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>

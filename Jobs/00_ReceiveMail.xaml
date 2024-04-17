@@ -1,12 +1,12 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="_00_ReceiveMail" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System.Net.Mail" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:uasa="clr-namespace:UiPath.Activities.System.Arrays;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_dicConfig" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
-    <x:Property Name="out_listSaveFile" Type="OutArgument(scg:List(x:String))" />
+    <x:Property Name="out_SaveFile" Type="OutArgument(scg:IEnumerable(x:String))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>947,1840</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1177,1905</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>_00_메일수신_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -104,12 +104,11 @@
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="00_ReceiveMail" sap:VirtualizedContainerService.HintSize="612,1775" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="00_ReceiveMail" sap:VirtualizedContainerService.HintSize="612,1840" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="strMail" />
       <Variable x:TypeArguments="ss:SecureString" Name="strPW" />
       <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="listMail" />
-      <Variable x:TypeArguments="scg:IEnumerable(x:String)" Name="SaveFile" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -124,21 +123,13 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:GetIMAPMailMessages>
-    <Assign DisplayName="첨부파일 리스트 변수 생성 | Assign" sap:VirtualizedContainerService.HintSize="550,122" sap2010:WorkflowViewState.IdRef="Assign_1">
-      <Assign.To>
-        <OutArgument x:TypeArguments="scg:List(x:String)">[out_listSaveFile]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="scg:List(x:String)">[New List(of String)]</InArgument>
-      </Assign.Value>
-    </Assign>
-    <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" DisplayName="메일 출력 변수For Each" sap:VirtualizedContainerService.HintSize="550,1125" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[listMail]">
+    <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" DisplayName="메일 출력 변수For Each" sap:VirtualizedContainerService.HintSize="550,969" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[listMail]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="snm:MailMessage">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="snm:MailMessage" Name="currentMailMessage" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="본문" sap:VirtualizedContainerService.HintSize="516,938" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="본문" sap:VirtualizedContainerService.HintSize="516,765" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -151,22 +142,21 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </WriteLine>
-            <ui:SaveMailAttachments sap2010:Annotation.AnnotationText="메일을 읽어서 첨부파일 어디에 저장할지 경로 기재&#xA;필터 설정 : &quot;.xlsx&quot; -&gt; 엑셀파일만 다운받기&#xA;출력 첨부 파일 변수 생성하면 IEnumerable형식, 리스트처럼 못쓰나..?" Attachments="[SaveFile]" DisplayName="첨부파일 저장 | Save Attachments" ExcludeInlineAttachments="False" Filter=".xlsx" FolderPath="Data\Input" sap:VirtualizedContainerService.HintSize="454,200" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_1" Message="[currentMailMessage]" OverwriteExisting="False">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-            </ui:SaveMailAttachments>
-            <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="454,492" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+            <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="454,519" sap2010:WorkflowViewState.IdRef="TryCatch_1">
               <TryCatch.Try>
-                <Sequence sap:VirtualizedContainerService.HintSize="416,241" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <Sequence sap:VirtualizedContainerService.HintSize="416,268" sap2010:WorkflowViewState.IdRef="Sequence_3">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <uasa:AppendItemToList x:TypeArguments="x:String" ItemIndex="{x:Null}" DisplayName="첨부파일 경로 리스트 추가 | Append Item to List" sap:VirtualizedContainerService.HintSize="354,156" sap2010:WorkflowViewState.IdRef="AppendItemToList`1_1" ItemToAppend="[SaveFile.ElementAt(0).ToString]" List="[out_listSaveFile]" />
+                  <ui:SaveMailAttachments sap2010:Annotation.AnnotationText="메일을 읽어서 첨부파일 어디에 저장할지 경로 기재&#xA;필터 설정 : &quot;.xlsx&quot; -&gt; 엑셀파일만 다운받기&#xA;출력 첨부 파일 변수 생성하면 IEnumerable형식, 리스트처럼 못쓰나..?" Attachments="[out_SaveFile]" DisplayName="첨부파일 저장 | Save Attachments" ExcludeInlineAttachments="False" Filter=".xlsx" FolderPath="Data\Input" sap:VirtualizedContainerService.HintSize="354,183" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_1" Message="[currentMailMessage]" OverwriteExisting="False">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:SaveMailAttachments>
                 </Sequence>
               </TryCatch.Try>
               <TryCatch.Catches>
@@ -181,14 +171,6 @@
                     <ActivityAction.Argument>
                       <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                     </ActivityAction.Argument>
-                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="첨부파일 없음">
-                      <sap:WorkflowViewStateService.ViewState>
-                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                        </scg:Dictionary>
-                      </sap:WorkflowViewStateService.ViewState>
-                    </WriteLine>
                   </ActivityAction>
                 </Catch>
               </TryCatch.Catches>
@@ -197,5 +179,17 @@
         </ActivityAction>
       </ui:ForEach.Body>
     </ui:ForEach>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="550,343" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="무시된 액티비티" sap:VirtualizedContainerService.HintSize="416,241" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <uasa:AppendItemToList x:TypeArguments="x:String" ItemIndex="{x:Null}" DisplayName="첨부파일 경로 리스트 추가 | Append Item to List" sap:VirtualizedContainerService.HintSize="354,156" sap2010:WorkflowViewState.IdRef="AppendItemToList`1_1" ItemToAppend="[out_SaveFile.ElementAt(1).ToString]" List="[out_listSaveFile]" />
+        </Sequence>
+      </ui:CommentOut.Body>
+    </ui:CommentOut>
   </Sequence>
 </Activity>
