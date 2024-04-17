@@ -2,11 +2,12 @@
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(sd:DataRow)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="io_strTest" Type="InOutArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1177,951</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1228,951</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="50">
@@ -160,6 +161,9 @@
         <OutArgument x:TypeArguments="x:String" x:Key="out_str공시기준일가격">
           <VisualBasicReference x:TypeArguments="x:String" ExpressionText="str공시기준일가격" />
         </OutArgument>
+        <InOutArgument x:TypeArguments="x:String" x:Key="io_strTest">
+          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="io_strTest" />
+        </InOutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
     <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="354,65" sap2010:WorkflowViewState.IdRef="CommentOut_2">
